@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:light_bulb/domain/blocs/light_bulb/light_bulb_bloc.dart';
+import 'package:lightbulb/domain/blocs/lightbulb/lightbulb_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,10 +8,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => LightBulbBloc(),
-      child: BlocListener<LightBulbBloc, LightBulbState>(
+      create: (_) => LightbulbBloc(),
+      child: BlocListener<LightbulbBloc, LightbulbState>(
         listener: (context, state) {
-          if (state is LightBulbOff) {
+          if (state is LightbulbOff) {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -45,13 +45,13 @@ class _Body extends StatelessWidget {
         Flexible(
           child: FittedBox(
             fit: BoxFit.fitWidth,
-            child: BlocBuilder<LightBulbBloc, LightBulbState>(
+            child: BlocBuilder<LightbulbBloc, LightbulbState>(
               builder: (context, state) {
                 IconData iconData;
                 int? hexCode;
-                if (state is LightBulbOn) {
+                if (state is LightbulbOn) {
                   iconData = Icons.lightbulb;
-                  hexCode = state.lightBulb.hexCode;
+                  hexCode = state.lightbulb.hexCode;
                 } else {
                   iconData = Icons.lightbulb_outline;
                 }
@@ -64,11 +64,11 @@ class _Body extends StatelessWidget {
           ),
         ),
         Center(
-          child: BlocBuilder<LightBulbBloc, LightBulbState>(
+          child: BlocBuilder<LightbulbBloc, LightbulbState>(
             builder: (context, state) {
               String color = '';
-              if (state is LightBulbOn) {
-                color = state.lightBulb.color;
+              if (state is LightbulbOn) {
+                color = state.lightbulb.color;
               }
               return Text(
                 color,
@@ -92,17 +92,17 @@ class _ActionButtons extends StatelessWidget {
       children: [
         FloatingActionButton(
           onPressed: () =>
-              context.read<LightBulbBloc>().add(const LightBulbBackEvent()),
+              context.read<LightbulbBloc>().add(const LightbulbBackEvent()),
           child: const Icon(Icons.arrow_back_ios_new),
         ),
         FloatingActionButton(
           onPressed: () =>
-              context.read<LightBulbBloc>().add(const LightBulbToggleEvent()),
+              context.read<LightbulbBloc>().add(const LightbulbToggleEvent()),
           child: const Icon(Icons.electric_bolt),
         ),
         FloatingActionButton(
           onPressed: () =>
-              context.read<LightBulbBloc>().add(const LightBulbNextEvent()),
+              context.read<LightbulbBloc>().add(const LightbulbNextEvent()),
           child: const Icon(Icons.arrow_forward_ios),
         ),
       ],

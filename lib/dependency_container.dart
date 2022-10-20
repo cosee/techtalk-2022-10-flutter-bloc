@@ -1,10 +1,10 @@
 import 'package:get_it/get_it.dart';
-import 'package:light_bulb/domain/interfaces/light_bulb_api.dart';
-import 'package:light_bulb/infrastructure/repositories/light_bulb.dart';
+import 'package:lightbulb/domain/interfaces/lightbulb_api.dart';
+import 'package:lightbulb/infrastructure/repositories/lightbulb.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> setupDependencies() {
-  getIt.registerLazySingleton<LightBulbAPI>(() => LightBulbRepository());
+  getIt.registerLazySingleton<LightbulbAPI>(() => LightbulbRepository());
   return getIt.allReady();
 }
