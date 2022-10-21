@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class Lightbulb extends Equatable {
-  const Lightbulb(this.color, this.hexCode);
+class LightBulb extends Equatable {
+  const LightBulb(this.color, this.hexCode);
 
   final String color;
   final int hexCode;

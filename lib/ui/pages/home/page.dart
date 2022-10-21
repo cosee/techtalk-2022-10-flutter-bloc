@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lightbulb/domain/blocs/lightbulb/lightbulb_bloc.dart';
+import 'package:light_bulb/domain/blocs/light_bulb/light_bulb_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,10 +8,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => LightbulbBloc(),
-      child: BlocListener<LightbulbBloc, LightbulbState>(
+      create: (_) => LightBulbBloc(),
+      child: BlocListener<LightBulbBloc, LightBulbState>(
         listener: (context, state) {
-          if (state is LightbulbOff) {
+          if (state is LightBulbOff) {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -45,11 +45,11 @@ class _Body extends StatelessWidget {
         Flexible(
           child: FittedBox(
             fit: BoxFit.fitWidth,
-            child: BlocBuilder<LightbulbBloc, LightbulbState>(
+            child: BlocBuilder<LightBulbBloc, LightBulbState>(
               builder: (context, state) {
                 IconData iconData;
                 int? hexCode;
-                if (state is LightbulbOn) {
+                if (state is LightBulbOn) {
                   iconData = Icons.lightbulb;
                   hexCode = state.lightbulb.hexCode;
                 } else {
@@ -64,10 +64,10 @@ class _Body extends StatelessWidget {
           ),
         ),
         Center(
-          child: BlocBuilder<LightbulbBloc, LightbulbState>(
+          child: BlocBuilder<LightBulbBloc, LightBulbState>(
             builder: (context, state) {
               String color = '';
-              if (state is LightbulbOn) {
+              if (state is LightBulbOn) {
                 color = state.lightbulb.color;
               }
               return Text(
@@ -92,17 +92,17 @@ class _ActionButtons extends StatelessWidget {
       children: [
         FloatingActionButton(
           onPressed: () =>
-              context.read<LightbulbBloc>().add(const LightbulbBackEvent()),
+              context.read<LightBulbBloc>().add(const LightBulbBackEvent()),
           child: const Icon(Icons.arrow_back_ios_new),
         ),
         FloatingActionButton(
           onPressed: () =>
-              context.read<LightbulbBloc>().add(const LightbulbToggleEvent()),
+              context.read<LightBulbBloc>().add(const LightBulbToggleEvent()),
           child: const Icon(Icons.electric_bolt),
         ),
         FloatingActionButton(
           onPressed: () =>
-              context.read<LightbulbBloc>().add(const LightbulbNextEvent()),
+              context.read<LightBulbBloc>().add(const LightBulbNextEvent()),
           child: const Icon(Icons.arrow_forward_ios),
         ),
       ],
