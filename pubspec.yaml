@@ -1,4 +1,4 @@
-name: lightbulb
+name: light_bulb
 description: A Flutter app for the upcoming TechTalk about BLoC.
 
 publish_to: 'none'
