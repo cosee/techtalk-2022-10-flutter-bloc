@@ -11,7 +11,3 @@ class LightBulbToggleEvent extends LightBulbEvent {
 class LightBulbNextEvent extends LightBulbEvent {
   const LightBulbNextEvent();
 }
-
-class LightBulbBackEvent extends LightBulbEvent {
-  const LightBulbBackEvent();
-}

@@ -12,18 +12,17 @@ class LightBulbBloc extends Bloc<LightBulbEvent, LightBulbState> {
   LightBulbBloc() : super(const LightBulbOff(0)) {
     on<LightBulbToggleEvent>(_onLightBulbToggleEvent);
     on<LightBulbNextEvent>(_onLightBulbNextEvent);
-    on<LightBulbBackEvent>(_onLightBulbBackEvent);
   }
 
   final LightBulbAPI _lightBulbAPI = getIt.lightBulbAPI;
 
   void _onLightBulbToggleEvent(
-    LightBulbEvent event,
+    LightBulbToggleEvent event,
     Emitter<LightBulbState> emit,
   ) {
     final colorId = state.colorId;
-    final lightBulb = _lightBulbAPI.getLightBulb(colorId);
     if (state is LightBulbOff) {
+      final lightBulb = _lightBulbAPI.getLightBulb(colorId);
       emit(LightBulbOn(colorId, lightBulb));
     } else {
       emit(LightBulbOff(colorId));
@@ -38,20 +37,6 @@ class LightBulbBloc extends Bloc<LightBulbEvent, LightBulbState> {
       int newColorId = state.colorId + 1;
       if (newColorId >= _lightBulbAPI.count) {
         newColorId = 0;
-      }
-      final lightBulb = _lightBulbAPI.getLightBulb(newColorId);
-      emit(LightBulbOn(newColorId, lightBulb));
-    }
-  }
-
-  void _onLightBulbBackEvent(
-    LightBulbBackEvent event,
-    Emitter<LightBulbState> emit,
-  ) {
-    if (state is LightBulbOn) {
-      int newColorId = state.colorId - 1;
-      if (newColorId < 0) {
-        newColorId = _lightBulbAPI.count - 1;
       }
       final lightBulb = _lightBulbAPI.getLightBulb(newColorId);
       emit(LightBulbOn(newColorId, lightBulb));

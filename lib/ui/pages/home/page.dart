@@ -7,28 +7,23 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => LightBulbBloc(),
-      child: BlocListener<LightBulbBloc, LightBulbState>(
-        listener: (context, state) {
-          if (state is LightBulbOff) {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                duration: Duration(seconds: 1),
-                behavior: SnackBarBehavior.floating,
-                content: Text('Light bulb is off'),
-              ),
-            );
-          }
-        },
-        child: Scaffold(
-          appBar: AppBar(title: const Text('TechTalk BLoC')),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: const _ActionButtons(),
-          body: const _Body(),
-        ),
+    // TODO add BlocProvider for LightBulbBloc
+    // TODO use BlocListener to show light bulb off message
+    return Scaffold(
+      appBar: AppBar(title: const Text('TechTalk BLoC')),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: const _ActionButtons(),
+      body: const _Body(),
+    );
+  }
+
+  void _showLightBulbOffMessage(BuildContext context) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        duration: Duration(seconds: 1),
+        behavior: SnackBarBehavior.floating,
+        content: Text('Light bulb is off'),
       ),
     );
   }
@@ -42,39 +37,12 @@ class _Body extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Flexible(
-          child: FittedBox(
-            fit: BoxFit.fitWidth,
-            child: BlocBuilder<LightBulbBloc, LightBulbState>(
-              builder: (context, state) {
-                IconData iconData;
-                int? hexCode;
-                if (state is LightBulbOn) {
-                  iconData = Icons.lightbulb;
-                  hexCode = state.lightBulb.hexCode;
-                } else {
-                  iconData = Icons.lightbulb_outline;
-                }
-                return Icon(
-                  iconData,
-                  color: hexCode == null ? null : Color(hexCode),
-                );
-              },
-            ),
-          ),
-        ),
+        //const _LightBulb(),
         Center(
-          child: BlocBuilder<LightBulbBloc, LightBulbState>(
-            builder: (context, state) {
-              String color = '';
-              if (state is LightBulbOn) {
-                color = state.lightBulb.color;
-              }
-              return Text(
-                color,
-                style: Theme.of(context).textTheme.headline3,
-              );
-            },
+          // TODO add BlocBuilder to change color name
+          child: Text(
+            'Color',
+            style: Theme.of(context).textTheme.headline3,
           ),
         ),
       ],
@@ -91,21 +59,53 @@ class _ActionButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         FloatingActionButton(
-          onPressed: () =>
-              context.read<LightBulbBloc>().add(const LightBulbBackEvent()),
+          onPressed: () {
+            // TODO send LightBulbBackEvent
+          },
           child: const Icon(Icons.arrow_back_ios_new),
         ),
         FloatingActionButton(
-          onPressed: () =>
-              context.read<LightBulbBloc>().add(const LightBulbToggleEvent()),
+          onPressed: () {
+            // TODO send LightBulbOnEvent
+          },
           child: const Icon(Icons.electric_bolt),
         ),
         FloatingActionButton(
-          onPressed: () =>
-              context.read<LightBulbBloc>().add(const LightBulbNextEvent()),
+          onPressed: () {
+            // TODO send LightBulbNextEvent
+          },
           child: const Icon(Icons.arrow_forward_ios),
         ),
       ],
+    );
+  }
+}
+
+class _LightBulb extends StatelessWidget {
+  const _LightBulb();
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: FittedBox(
+        fit: BoxFit.fitWidth,
+        child: BlocBuilder<LightBulbBloc, LightBulbState>(
+          builder: (context, state) {
+            IconData iconData;
+            int? hexCode;
+            if (state is LightBulbOn) {
+              iconData = Icons.lightbulb;
+              hexCode = state.lightBulb.hexCode;
+            } else {
+              iconData = Icons.lightbulb_outline;
+            }
+            return Icon(
+              iconData,
+              color: hexCode == null ? null : Color(hexCode),
+            );
+          },
+        ),
+      ),
     );
   }
 }
