@@ -51,7 +51,7 @@ class _Body extends StatelessWidget {
                 int? hexCode;
                 if (state is LightBulbOn) {
                   iconData = Icons.lightbulb;
-                  hexCode = state.lightbulb.hexCode;
+                  hexCode = state.lightBulb.hexCode;
                 } else {
                   iconData = Icons.lightbulb_outline;
                 }
@@ -68,7 +68,7 @@ class _Body extends StatelessWidget {
             builder: (context, state) {
               String color = '';
               if (state is LightBulbOn) {
-                color = state.lightbulb.color;
+                color = state.lightBulb.color;
               }
               return Text(
                 color,

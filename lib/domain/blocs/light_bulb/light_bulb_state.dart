@@ -14,10 +14,10 @@ class LightBulbOff extends LightBulbState {
 }
 
 class LightBulbOn extends LightBulbState {
-  const LightBulbOn(super.colorIndex, this.lightbulb);
+  const LightBulbOn(super.colorIndex, this.lightBulb);
 
-  final LightBulb lightbulb;
+  final LightBulb lightBulb;
 
   @override
-  List<Object?> get props => [lightbulb];
+  List<Object?> get props => [lightBulb];
 }

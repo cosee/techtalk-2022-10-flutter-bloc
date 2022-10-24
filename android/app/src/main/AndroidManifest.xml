@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="biz.cosee.bloc.lightbulb">
    <application
-        android:label="lightbulb"
+        android:label="light-bulb"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
