@@ -1,4 +1,4 @@
-package biz.cosee.bloc.lightbulb
+package biz.cosee.bloc.light_bulb
 
 import io.flutter.embedding.android.FlutterActivity
 
