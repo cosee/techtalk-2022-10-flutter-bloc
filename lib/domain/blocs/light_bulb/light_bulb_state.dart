@@ -1,20 +1,20 @@
 part of 'light_bulb_bloc.dart';
 
 abstract class LightBulbState extends Equatable {
-  const LightBulbState(this.colorIndex);
+  const LightBulbState(this.colorId);
 
-  final int colorIndex;
+  final int colorId;
 
   @override
-  List<Object?> get props => [colorIndex];
+  List<Object?> get props => [colorId];
 }
 
 class LightBulbOff extends LightBulbState {
-  const LightBulbOff(super.colorIndex);
+  const LightBulbOff(super.colorId);
 }
 
 class LightBulbOn extends LightBulbState {
-  const LightBulbOn(super.colorIndex, this.lightBulb);
+  const LightBulbOn(super.colorId, this.lightBulb);
 
   final LightBulb lightBulb;
 

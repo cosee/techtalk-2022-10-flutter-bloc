@@ -21,12 +21,12 @@ class LightBulbBloc extends Bloc<LightBulbEvent, LightBulbState> {
     LightBulbEvent event,
     Emitter<LightBulbState> emit,
   ) {
-    final colorIndex = state.colorIndex;
+    final colorId = state.colorId;
     if (state is LightBulbOff) {
-      final lightBulb = _lightBulbAPI.getLightBulb(colorIndex);
-      emit(LightBulbOn(colorIndex, lightBulb));
+      final lightBulb = _lightBulbAPI.getLightBulb(colorId);
+      emit(LightBulbOn(colorId, lightBulb));
     } else {
-      emit(LightBulbOff(colorIndex));
+      emit(LightBulbOff(colorId));
     }
   }
 
@@ -35,12 +35,12 @@ class LightBulbBloc extends Bloc<LightBulbEvent, LightBulbState> {
     Emitter<LightBulbState> emit,
   ) {
     if (state is LightBulbOn) {
-      int newColorIndex = state.colorIndex + 1;
-      if (newColorIndex >= _lightBulbAPI.count) {
-        newColorIndex = 0;
+      int newColorId = state.colorId + 1;
+      if (newColorId >= _lightBulbAPI.count) {
+        newColorId = 0;
       }
-      final lightBulb = _lightBulbAPI.getLightBulb(newColorIndex);
-      emit(LightBulbOn(newColorIndex, lightBulb));
+      final lightBulb = _lightBulbAPI.getLightBulb(newColorId);
+      emit(LightBulbOn(newColorId, lightBulb));
     }
   }
 
@@ -49,12 +49,12 @@ class LightBulbBloc extends Bloc<LightBulbEvent, LightBulbState> {
     Emitter<LightBulbState> emit,
   ) {
     if (state is LightBulbOn) {
-      int newColorIndex = state.colorIndex - 1;
-      if (newColorIndex < 0) {
-        newColorIndex = _lightBulbAPI.count - 1;
+      int newColorId = state.colorId - 1;
+      if (newColorId < 0) {
+        newColorId = _lightBulbAPI.count - 1;
       }
-      final lightBulb = _lightBulbAPI.getLightBulb(newColorIndex);
-      emit(LightBulbOn(newColorIndex, lightBulb));
+      final lightBulb = _lightBulbAPI.getLightBulb(newColorId);
+      emit(LightBulbOn(newColorId, lightBulb));
     }
   }
 }
