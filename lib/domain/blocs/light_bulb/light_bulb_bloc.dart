@@ -10,51 +10,51 @@ part 'light_bulb_state.dart';
 
 class LightBulbBloc extends Bloc<LightBulbEvent, LightBulbState> {
   LightBulbBloc() : super(const LightBulbOff(0)) {
-    on<LightBulbToggleEvent>(_onLightbulbToggleEvent);
-    on<LightBulbNextEvent>(_onLightbulbNextEvent);
-    on<LightBulbBackEvent>(_onLightbulbBackEvent);
+    on<LightBulbToggleEvent>(_onLightBulbToggleEvent);
+    on<LightBulbNextEvent>(_onLightBulbNextEvent);
+    on<LightBulbBackEvent>(_onLightBulbBackEvent);
   }
 
-  final LightBulbAPI _lightbulbAPI = getIt.lightBulbAPI;
+  final LightBulbAPI _lightBulbAPI = getIt.lightBulbAPI;
 
-  void _onLightbulbToggleEvent(
+  void _onLightBulbToggleEvent(
     LightBulbEvent event,
     Emitter<LightBulbState> emit,
   ) {
     final colorIndex = state.colorIndex;
-    final lightbulb = _lightbulbAPI.getLightBulb(colorIndex);
+    final lightBulb = _lightBulbAPI.getLightBulb(colorIndex);
     if (state is LightBulbOff) {
-      emit(LightBulbOn(colorIndex, lightbulb));
+      emit(LightBulbOn(colorIndex, lightBulb));
     } else {
       emit(LightBulbOff(colorIndex));
     }
   }
 
-  void _onLightbulbNextEvent(
+  void _onLightBulbNextEvent(
     LightBulbNextEvent event,
     Emitter<LightBulbState> emit,
   ) {
     if (state is LightBulbOn) {
       int newColorIndex = state.colorIndex + 1;
-      if (newColorIndex >= _lightbulbAPI.count) {
+      if (newColorIndex >= _lightBulbAPI.count) {
         newColorIndex = 0;
       }
-      final lightbulb = _lightbulbAPI.getLightBulb(newColorIndex);
-      emit(LightBulbOn(newColorIndex, lightbulb));
+      final lightBulb = _lightBulbAPI.getLightBulb(newColorIndex);
+      emit(LightBulbOn(newColorIndex, lightBulb));
     }
   }
 
-  void _onLightbulbBackEvent(
+  void _onLightBulbBackEvent(
     LightBulbBackEvent event,
     Emitter<LightBulbState> emit,
   ) {
     if (state is LightBulbOn) {
       int newColorIndex = state.colorIndex - 1;
       if (newColorIndex < 0) {
-        newColorIndex = _lightbulbAPI.count - 1;
+        newColorIndex = _lightBulbAPI.count - 1;
       }
-      final lightbulb = _lightbulbAPI.getLightBulb(newColorIndex);
-      emit(LightBulbOn(newColorIndex, lightbulb));
+      final lightBulb = _lightBulbAPI.getLightBulb(newColorIndex);
+      emit(LightBulbOn(newColorIndex, lightBulb));
     }
   }
 }
